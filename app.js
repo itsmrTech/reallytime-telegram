@@ -3,11 +3,19 @@ const token = '441996257:AAGMaPIxkfT8eQfB5Cj68vygFF_i2hQaC-Y'
 var bot = botgram(token);
 var context=[];
 var chat_id,message_id;
+
+
 function startTime() {
     var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
+    var h = today.getHours()+4;
+    var m = today.getMinutes()+30;
     var s = today.getSeconds();
+    if(h>24){
+        h=h%24;
+    }
+    if(m>60){
+        m=m%60;
+    }
     m = checkTime(m);
     s = checkTime(s);
     var txt =
