@@ -18,7 +18,7 @@ function startTime() {
     }
     m = checkTime(m);
     s = checkTime(s);
-    var txt =
+    var txt ='🕰 '+
     h + ":" + m + ":" + s;
     var request = require('request');
     for(var i=0;i<context.length;i++){
