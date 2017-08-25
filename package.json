@@ -1,0 +1,15 @@
+{
+  "name": "reallytime",
+  "version": "1.0.0",
+  "description": "real time clock for telegram",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mrTech",
+  "license": "ISC",
+  "dependencies": {
+    "botgram": "^2.0.1",
+    "request": "^2.81.0"
+  }
+}
