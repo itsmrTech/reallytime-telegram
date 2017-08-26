@@ -7,13 +7,13 @@ var chat_id,message_id;
 
 function startTime() {
     var today = new Date();
-    var h = today.getHours()+5;
+    var h = today.getHours()+4;
     var m = today.getMinutes()+30;
     var s = today.getSeconds();
-    if(h>24){
+    if(h>23){
         h=h%24;
     }
-    if(m>60){
+    if(m>59){
         m=m%60;
     }
     m = checkTime(m);
