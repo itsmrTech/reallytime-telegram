@@ -1,5 +1,5 @@
 var botgram = require('botgram');
-const token = '441996257:AAGMaPIxkfT8eQfB5Cj68vygFF_i2hQaC-Y'
+const token = '441996257:AAFI6BoISHlkQXw4YICXmr9AGk-BU-wjtPA'
 var bot = botgram(token);
 var context=[];
 var chat_id,message_id;
