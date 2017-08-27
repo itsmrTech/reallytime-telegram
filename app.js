@@ -53,8 +53,7 @@ function jalali() {
     }
     return " " + week[d] + " " + day + "/" + month + "/" + year;
 }
-
-function startTime() {
+function timeDateCreator(){
     var today = new Date();
     var h = today.getHours() + 4;
     var m = today.getMinutes() + 29;
@@ -70,6 +69,11 @@ function startTime() {
     s = checkTime(s);
     var txt = '🕰 ' +
         h + ":" + m + ' 📆 ' + jalali();
+
+        return txt;
+}
+function startTime() {
+    var txt=timeDateCreator()
     var request = require('request');
     User.find({}, function (err,found) {
 
@@ -166,12 +170,14 @@ bot.command('start', function (msg, reply, next) {
 
         }
     })
-    context.push({
-        chat_id: msg.chat.id,
-        message_id: msg.id + 1
-    })
+    // context.push({
+    //     chat_id: msg.chat.id,
+    //     message_id: msg.id + 1
+    // })
 
-    reply.text("this is the clock");
+    var txt=timeDateCreator();
+    console.log('timeDate',txt)
+    reply.text(txt);
 })
 bot.command('clock', function (msg, reply, next) {
     var request = require('request');
@@ -191,7 +197,7 @@ bot.command('clock', function (msg, reply, next) {
         if (!error && response.statusCode == 200) {
             console.log(body.id) // Print the shortened url.
         }
-        console.log(response)
+        // console.log(response)
     });
 
 
