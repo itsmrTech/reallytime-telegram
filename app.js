@@ -14,6 +14,7 @@ function startTime() {
         h=h%24;
     }
     if(m>59){
+        h++;
         m=m%60;
     }
     m = checkTime(m);
