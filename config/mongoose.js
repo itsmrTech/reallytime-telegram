@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 module.exports = {
     run: function() {
         // Connect to the local database
-        mongoose.connect('localhost:27017/reallytime');
+        mongoose.connect(require('./config/env').db);
 
         // Make sure the database is connected
         var db = mongoose.connection;
