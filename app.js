@@ -64,6 +64,7 @@ function timeDateCreator(){
     if (m > 59) {
         h++;
         m = m % 60;
+        m++;
     }
     m = checkTime(m);
     s = checkTime(s);
