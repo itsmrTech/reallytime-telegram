@@ -11,11 +11,11 @@ function startTime() {
     var m = today.getMinutes()+30;
     var s = today.getSeconds();
     if(h>23){
-        h=h%24;
+        h=h%23;
     }
     if(m>59){
         h++;
-        m=m%60;
+        m=m%59;
     }
     m = checkTime(m);
     s = checkTime(s);
