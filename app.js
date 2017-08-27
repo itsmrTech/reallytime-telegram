@@ -1,5 +1,5 @@
 var botgram = require('botgram');
-const token = '399005653:AAHCJnysvGT5HIgj1rTfjp6UqDCGvR4Qybc'
+const token = require('./config/env').token;
 var bot = botgram(token);
 var context = [];
 var chat_id, message_id;
