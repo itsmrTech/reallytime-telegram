@@ -1,6 +1,6 @@
 {
   "name": "reallytime",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "real time clock for telegram",
   "main": "app.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "botgram": "^2.0.1",
+    "mongoose": "^4.11.8",
     "request": "^2.81.0"
   }
 }
