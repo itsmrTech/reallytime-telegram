@@ -1,4 +1,5 @@
 var botgram = require('botgram');
+// var inline=require('./inline')
 const token = require('./config/env').token;
 var bot = botgram(token);
 var context = [];
@@ -8,7 +9,7 @@ var User = require('./schemas/user')
 
 var db = require('./config/mongoose.js').run();
 
-function jalali() {
+function jalali(cmd) {
     var week = new Array("يكشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه", "شنبه")
     var months = new Array("فروردين", "ارديبهشت", "خرداد", "تير", "مرداد", "شهريور", "مهر", "آبان", "آذر", "دي", "بهمن", "اسفند");
     var a = new Date();
@@ -51,7 +52,14 @@ function jalali() {
         default:
             break;
     }
-    return " " + week[d] + " " + day + "/" + month + "/" + year;
+    if(cmd=='full'){
+
+        return " " + week[d] + " " + day + " " + months[month-1] + " " + year;
+    }
+    else{
+        
+        return " " + week[d] + " " + day + "/" + month + "/" + year;
+    }
 }
 function timeDateCreator(){
     var today = new Date();
@@ -73,8 +81,14 @@ function timeDateCreator(){
 
         return txt;
 }
+var lastDay=new Date();
 function startTime() {
-    var txt=timeDateCreator()
+    var today =new Date();
+    var txt;
+    var newDay=false;
+    if(lastDay.getDate()==lastDay.getDate()){
+        txt=timeDateCreator();
+        // var txt=timeDateCreator()
     var request = require('request');
     User.find({}, function (err,found) {
 
@@ -100,6 +114,58 @@ function startTime() {
             });
         }
     })
+    }
+    else{
+        txt='🗓 '+jalali('full');
+      // var txt=timeDateCreator()
+    var request = require('request');
+    User.find({}, function (err,found) {
+        lastDay=today;
+        console.log(found)
+        for (var i = 0; i < found.length; i++) {
+            var post_data_send = {
+                chat_id: found[i].telegramChat.id,
+                // message_id: found[i].timeDateMessageId,
+                text: timeDateCreator(),
+                disable_notification:true
+            }
+            var post_data_edit = {
+                chat_id: found[i].telegramChat.id,
+                message_id: found[i].timeDateMessageId,
+                text: txt
+            }
+
+            var optionsEdit = {
+                uri: 'https://api.telegram.org/bot' + token + '/editMessageText',
+                method: 'POST',
+                json: post_data_edit
+            };
+            var optionsSend = {
+                uri: 'https://api.telegram.org/bot' + token + '/sendMessage',
+                method: 'POST',
+                json: post_data_send
+            };
+            request(optionsEdit, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log(body)
+                    
+                }
+                // console.log(response)
+            });
+            request(optionsSend, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log(body)
+                    console.log(body.result.chat.id)
+                    User.update({"telegramChat.id":body.result.chat.id},{timeDateMessageId:body.result.message_id},function(err,sdf){
+                        console.log(sdf)
+                    })
+                }
+                // console.log(response)
+            });
+        }
+    })
+    }
+    
     var t = setTimeout(startTime, 60000);
 }
 
@@ -149,6 +215,23 @@ var m = {
     "type": "text",
     "queued": false
 };
+// bot.all(function(msg,reply,next){
+//     console.log(msg)
+// })
+bot.on("inline_query", function(query) {
+    bot.answerInlineQuery(query.id, [{
+      id: '0', 
+      type: 'article', 
+      title: 'Title', 
+      description: 'Markdown', 
+      message_text: query.query,
+      parse_mode: 'Markdown'
+    }]);
+});
+bot.mention(function (msg,reply, next) {
+    console.log('QUERY',"uhuuuuuuuuuuuuuuuuuu")
+    
+});
 bot.text(function (msg, reply, next) {
     m = msg;
     reply.text(JSON.stringify(msg));
