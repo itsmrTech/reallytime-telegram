@@ -9,10 +9,10 @@ var User = require('./schemas/user')
 
 var db = require('./config/mongoose.js').run();
 
-function jalali(cmd) {
+function jalali(cmd,date) {
     var week = new Array("يكشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه", "شنبه")
     var months = new Array("فروردين", "ارديبهشت", "خرداد", "تير", "مرداد", "شهريور", "مهر", "آبان", "آذر", "دي", "بهمن", "اسفند");
-    var a = new Date();
+    var a = date;
     var d = a.getDay();
     var day = a.getDate();
     var month = a.getMonth() + 1;
@@ -63,17 +63,22 @@ function jalali(cmd) {
 }
 function timeDateCreator(){
     var today = new Date();
-    var h = today.getHours() + 4;
-    var m = today.getMinutes() + 29;
+    
+    var h = today.getHours() ;
+    var m = today.getMinutes() ;
     var s = today.getSeconds();
-    if (h > 23) {
-        h = h % 24;
-    }
-    if (m > 59) {
-        h++;
-        m = m % 60;
-        m++;
-    }
+    // if (h > 23) {
+    //     h = h % 24;
+    //     today.se
+    // }
+    // if (m > 59) {
+    //     if(h==23)
+    //         h=0;
+    //     else
+    //         h++;
+    //     m = m % 60;
+    //     m++;
+    // }
     m = checkTime(m);
     s = checkTime(s);
     var txt = '🕰 ' +

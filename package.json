@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "botgram": "^2.0.1",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
     "mongoose": "^4.11.8",
     "node-telegram-bot-api": "^0.28.0",
     "request": "^2.81.0"
