@@ -9,10 +9,10 @@ var User = require('./schemas/user')
 
 var db = require('./config/mongoose.js').run();
 
-function jalali(cmd,date) {
+function jalali(cmd) {
     var week = new Array("يكشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه", "شنبه")
     var months = new Array("فروردين", "ارديبهشت", "خرداد", "تير", "مرداد", "شهريور", "مهر", "آبان", "آذر", "دي", "بهمن", "اسفند");
-    var a = date;
+    var a = new Date();
     var d = a.getDay();
     var day = a.getDate();
     var month = a.getMonth() + 1;
